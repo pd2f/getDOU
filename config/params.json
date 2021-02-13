@@ -1,0 +1,18 @@
+{
+	"url_login": "https://inlabs.in.gov.br/logar.php",
+	"url_logout": "https://inlabs.in.gov.br/logout.php",
+	"diretorio": "./data",
+	"tipos_dou": [
+		"DO1",
+		"DO2",
+		"DO3",
+		"DO1E",
+		"DO2E",
+		"DO3E"
+	],
+	"ano": "2021",
+	"mes": "02",
+	"dia": "08",
+	"url_download": "http://inlabs.in.gov.br/index.php?p=$ano_mes_dia&dl=$file",
+	"origem": "exemplo_origem"
+}
