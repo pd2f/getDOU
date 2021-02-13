@@ -1,4 +1,4 @@
 .vscode/.ropeproject/objectdb
 data/*
-__pycache__/download_dou.cpython-39.pyc
-config/auth.json
+__pycache__/*
+config/*
