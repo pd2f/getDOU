@@ -1,4 +1,5 @@
 .vscode/.ropeproject/objectdb
 data/*
-__pycache__/*
 config/*
+__pycache__/*
+
