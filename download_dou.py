@@ -8,16 +8,12 @@ import os
 import json
 import certifi
 
-
-path_base = os.getcwd()
-
 def config():
     try:
         with open('config/auth.json') as json_file:
             autenticacao = json.load(json_file)
         with open('config/params.json') as json_file:
             param = json.load(json_file)
-        os.chdir(param.get("diretorio"))
         return autenticacao,param
     except:
         print("Falha ao tentar acessar o diretório de configurações") 
@@ -28,6 +24,7 @@ def get():
     download(ano_mes_dia, param, autenticacao)
 
 def download(ano_mes_dia, param, autenticacao):
+    print(ano_mes_dia)
     file = ano_mes_dia+'-'+param.get("tipos_dou")[0]+'.zip'
     param.get("url_download").replace("$ano_mes_dia",ano_mes_dia).replace("$file",file)
     headers = {'origem': param.get("origem")}
@@ -35,11 +32,11 @@ def download(ano_mes_dia, param, autenticacao):
     res.verify = certifi.where() #"../../imprensa_nacional.cer"
     res.post(param.get("url_login"), data=autenticacao, headers=headers, cookies=cookie.CookieJar(),verify=False)
     ct = res.get(param.get("url_download").replace("$ano_mes_dia",ano_mes_dia).replace("$file",file))
-    open(file, 'wb').write(ct.content)
+    open(param.get("diretorio")+file, 'wb').write(ct.content)
     res.get(param.get("url_logout"))
-    os.chdir(path_base)
 
 def getDDMMAAA(dia,mes,ano):
     autenticacao,param = config()
-    ano_mes_dia = dia+'-'+mes+'-'+ano
+    ano_mes_dia = ano+'-'+mes+'-'+dia
+    print(autenticacao)
     download(ano_mes_dia, param, autenticacao)

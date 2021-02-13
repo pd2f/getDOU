@@ -1,4 +1,4 @@
 import download_dou as dou
 
 dou.get()
-dou.getDDMMAAA('10',"02","2021")
+dou.getDDMMAAA("11","01","2021")
