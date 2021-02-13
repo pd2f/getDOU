@@ -25,6 +25,9 @@ def config():
 def get():
     autenticacao,param = config()
     ano_mes_dia = param.get("ano")+'-'+param.get("mes")+'-'+param.get("dia")
+    download(ano_mes_dia, param, autenticacao)
+
+def download(ano_mes_dia, param, autenticacao):
     file = ano_mes_dia+'-'+param.get("tipos_dou")[0]+'.zip'
     param.get("url_download").replace("$ano_mes_dia",ano_mes_dia).replace("$file",file)
     headers = {'origem': param.get("origem")}
@@ -35,3 +38,8 @@ def get():
     open(file, 'wb').write(ct.content)
     res.get(param.get("url_logout"))
     os.chdir(path_base)
+
+def getDDMMAAA(dia,mes,ano):
+    autenticacao,param = config()
+    ano_mes_dia = dia+'-'+mes+'-'+ano
+    download(ano_mes_dia, param, autenticacao)
