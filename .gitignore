@@ -1,7 +1,5 @@
 config/*
 .vscode/.ropeproject/objectdb
 data/*
-
 __pycache__/*
 config/auth.json
-config/params.json
