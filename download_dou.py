@@ -24,13 +24,12 @@ def get():
     download(ano_mes_dia, param, autenticacao)
 
 def download(ano_mes_dia, param, autenticacao):
-    print(ano_mes_dia)
     file = ano_mes_dia+'-'+param.get("tipos_dou")[0]+'.zip'
     param.get("url_download").replace("$ano_mes_dia",ano_mes_dia).replace("$file",file)
     headers = {'origem': param.get("origem")}
     res = requests.session()
     res.verify = certifi.where() #"../../imprensa_nacional.cer"
-    res.post(param.get("url_login"), data=autenticacao, headers=headers, cookies=cookie.CookieJar(),verify=False)
+    res.post(param.get("url_login"), data=autenticacao, headers=headers, cookies=cookie.CookieJar(),verify=True)
     ct = res.get(param.get("url_download").replace("$ano_mes_dia",ano_mes_dia).replace("$file",file))
     open(param.get("diretorio")+file, 'wb').write(ct.content)
     res.get(param.get("url_logout"))
@@ -38,5 +37,4 @@ def download(ano_mes_dia, param, autenticacao):
 def getDDMMAAA(dia,mes,ano):
     autenticacao,param = config()
     ano_mes_dia = ano+'-'+mes+'-'+dia
-    print(autenticacao)
     download(ano_mes_dia, param, autenticacao)
